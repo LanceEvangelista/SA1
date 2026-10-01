@@ -55,25 +55,32 @@ title S2
 
 %% d. AVG POWER
 
-Ty1 = 1/25;
-Tp1 = 1/500;
 
-y1pwr = (1/Ty1)*(sum(y1))^2;
-p1pwr = (1/Tp1)*(sum(p1))^2;
-s1pwr = (1/Ty1)*(sum(s1))^2;
-s2pwr = (1/Ty1)*(sum(s2))^2;
+y1pwr = (sum(y1.^2))/length(y1);
+p1pwr = (sum(p1.^2))/length(p1);
+s1pwr = (sum(s1.^2))/length(s1);
+s2pwr = (sum(s2.^2))/length(s2);
 
 %% f. fftshift
 
 fs1 = fftshift(s1f);
 subplot(1,2,1)
-plot(-511:512,abs(fs1))
+plot(-(length(fs1))/2:(length(fs1))/2 -1,abs(fs1))
 
 fs2 = fftshift(s2f);
 subplot(1,2,2)
-plot(-512:511,abs(fs2))
+plot(-(length(fs2))/2:(length(fs2))/2 -1,abs(fs2))
 
 %% part 2. LCCDE
 
+%% D Plotting Magnitude Response
 
+b = [0.272, -0.272, -0.198];
+a = [1, 0.198, 0.301, 0.124];
 
+[h, w] = freqz(b, a, 1024);
+
+%abs = since h is a complete number we want magnitude and recall magnitude
+%is abs value
+plot(w, abs(h)); grid on
+xlabel('Rad/Sample') %how much angle per sample
