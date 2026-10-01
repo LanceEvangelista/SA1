@@ -80,7 +80,7 @@ a = [1, 0.198, 0.301, 0.124];
 
 [h, w] = freqz(b, a, 1024);
 
-%abs = since h is a complete number we want magnitude and recall magnitude
+%abs = since h is a complex number we want magnitude and recall magnitude
 %is abs value
 plot(w, abs(h)); grid on
 xlabel('Rad/Sample') %how much angle per sample
